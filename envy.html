@@ -1,10 +1,102 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>,,,</title>
-        <body>
-            <h1>salom dunyo </h1>
-            <script src="envy.js"></script>
-        </body>
-    </head>
+
+<head>
+    <title>js dars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0165fa,#0165fa,);
+            padding: 10px;
+        }
+
+        .todo-app {
+            width: 100%;
+            max-width: 540px;
+            background: #f40606;
+            margin: 100px auto 20px;
+            padding: 40px 30px 70px;
+            border-radius: 10px;
+        }
+
+        #list-container li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            cursor: pointer;
+        }
+
+        #list-container li.checked span {
+            text-decoration: line-through;
+            color: #190202;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="todo-app">
+            <h2> Royxat</h2>
+
+            <div class="row">
+                <input type="text" id="input-box" placeholder="yozing">
+                <button onclick="addTask()">Qoshish</button>
+            </div>
+
+            <ul id="list-container">
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            const input = document.getElementById('input-box');
+            const taskText = input.value.trim();
+
+            if (taskText === '') {
+                alert(" vazifa matnini kiriting");
+                return;
+            }
+
+            const li = document.createElement('li');
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.style.marginRight = '10px';
+
+            const span = document.createElement('span');
+            span.textContent = taskText;
+
+            li.appendChild(checkbox);
+            li.appendChild(span);
+
+            li.onclick = function () {
+                li.classList.toggle('checked');
+                checkbox.checked = li.classList.contains('checked');
+            };
+
+            const taskList = document.getElementById('list-container');
+            taskList.appendChild(li); 
+
+            input.value = '';
+            input.focus();
+        }
+
+        document.getElementById('input-box').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+    </script>
+
+</body>
 </html>
